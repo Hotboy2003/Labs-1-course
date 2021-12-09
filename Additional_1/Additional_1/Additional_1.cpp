@@ -32,6 +32,6 @@ int main()
     int x = 0;
     while (x * Q2 < A)
         x++;
-    Amin = std::min(Amin, x * Q2);
+    Amin = std::min(Amin, x * P2);
     std::cout << Amin;
 }
