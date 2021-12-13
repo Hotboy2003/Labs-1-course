@@ -11,6 +11,7 @@ int main()
 	AO::Device* device = new AO::Device("СПТ963", 0);
 	vec.push_back(device);
 	device = new AO::Device("МКТС", 1);
+	vec.push_back(device);
 
 	for (auto& i : vec)
 	{

@@ -17,7 +17,7 @@ namespace AO
 
 	void Device::Poll()
 	{
-		srand(time(0));
+		
 		switch (address)
 		{
 		case 0:
@@ -36,7 +36,7 @@ namespace AO
 	}
 	void Device::Print()
 	{
-		std::cout << "Name:  " << name << '\n' << "Number: " << address << '\n' << "Energy: " << energy << '\n' << "Temperature: " << temperature << '\n';
+		std::cout << "Name:  " << name << '\n' << "Number: " << address << '\n' << "Energy: " << energy << '\n' << "Temperature: " << temperature << '\n' << std::endl;
 	}
 
 }
