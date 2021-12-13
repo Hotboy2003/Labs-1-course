@@ -2,7 +2,7 @@
 #pragma once
 #include <iostream>
 
-namespace VK
+namespace AO
 {
 	class Device
 	{

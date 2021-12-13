@@ -7,16 +7,11 @@ int main()
 {
 	setlocale(LC_ALL, "Rus");
 
-	std::vector<VK::Device*> vec;
-	VK::Device* device = new VK::Device("СПТ963", 0);
+	std::vector<AO::Device*> vec;
+	AO::Device* device = new AO::Device("СПТ963", 0);
 	vec.push_back(device);
-	device = new VK::Device("МКТС", 1); //VK::Device* device1 = new VK::Device("МКТС", 1);
-	vec.push_back(device);
-	/*
-	Если нужно добавить устройство, то дописать
-	device = new VK::Device("...", ...);
-	Можно реализовать кнопкой
-	*/
+	device = new AO::Device("МКТС", 1);
+
 	for (auto& i : vec)
 	{
 		i->Poll();

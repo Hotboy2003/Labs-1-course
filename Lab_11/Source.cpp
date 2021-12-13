@@ -1,7 +1,7 @@
 ﻿#include <iostream>
 #include "Header.hpp"
 #include <ctime>
-namespace VK
+namespace AO
 {
 	Device::Device(std::string name1, int address1)
 	{
@@ -12,7 +12,7 @@ namespace VK
 	}
 	Device::~Device()
 	{
-		//work Destructor
+
 	};
 
 	void Device::Poll()
@@ -21,21 +21,22 @@ namespace VK
 		switch (address)
 		{
 		case 0:
-			temperature = -50 + rand() % (650 + (-50) + 1);
-			energy = 0 + rand() % (1000000000 - 0 + 1);
-			if (temperature == 0) energy = 0;
+			temperature = rand() % 1000;
+			energy = 1000 + rand() % 10000;
+			if (temperature == 0) 
+				energy = 0;
 			break;
 		case 1:
-			temperature = 0 + rand() % (150 - 0 + 1);
-			energy = (0.13 * (rand() % (2) + 1)) * (rand() % (1000000000));
-			if (temperature == 0) energy = 0;
+			temperature = rand() % 1000;
+			energy = 1000 + rand() % 10000;
+			if (temperature == 0) 
+				energy = 0;
 			break;
-			// ïðîäîëæèòü, åñëè áóäóò ïîõîæèå òèïû
 		}
 	}
 	void Device::Print()
 	{
-		std::cout << "Íàèìåíîâàíèå óñòðîéñòâà: " << name << '\n' << "Àäðåñ óñòðîéñòâà: " << address << '\n' << "Íàêîïëåííàÿ òåïëîâàÿ ýíåðãèÿ: " << energy << '\n' << "Òåìïåðàòóðà: " << temperature << '\n';
+		std::cout << "Name:  " << name << '\n' << "Number: " << address << '\n' << "Energy: " << energy << '\n' << "Temperature: " << temperature << '\n';
 	}
 
 }
