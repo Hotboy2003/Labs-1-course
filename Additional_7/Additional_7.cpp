@@ -36,7 +36,7 @@ int main() {
     for (int i = 0; i < v.size(); i++) {
         if (ProizCifr(v[i]) == 144) {
             v.erase(v.begin() + i);
-            i++;
+            i = i - 1;
         }
     }
     for (int i = 0; i < v.size(); i++) {
