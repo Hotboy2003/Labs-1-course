@@ -1,16 +1,22 @@
 ﻿#include <SFML/Graphics.hpp>
 #include <thread>
 #include <chrono>
-#include "Header.hpp"
+#include "Source.hpp"
 #include <iostream>
 
 using namespace std::chrono_literals;
 
 int main()
 {
+    /*ao::Planets* planets[10];
+    for (int i = 0; i++; i < 10)
+    {
+        planets[i] = new ao::Planets(i * 190, 50, 20);
+    }*/
+
     setlocale(LC_ALL, "Rus");
     float t = 0; // с
-    float grav[11] = { 0, 0, 9.8, 3.7, 8.87, 3.721, 24.79, 10.44, 8.87, 11.15, 0 };
+    float grav[11] = { 0, 9.8, 9.8, 3.7, 8.87, 3.721, 24.79, 10.44, 8.87, 11.15, 9.8 };
 
     // Фон
     sf::Image planimg[11];
@@ -37,6 +43,10 @@ int main()
     plante[9].loadFromImage(planimg[9]);
     plante[10].loadFromImage(planimg[10]);
 
+    sf::Text text;
+    sf::Font font;
+    
+
     // Определяем планету
     int k;
     std::cout << "Выберите планету: " << std::endl;
@@ -54,9 +64,13 @@ int main()
     std::cin >> k;
 
     if ((k > 10) || (k < 1))
+    {
+        k = 2;
         std::cout << "Написано же по русски, что нужно выбрать число от 1 до 10. По умолчанию выбрана планета Земля" << std::endl;
+        text.setString("Написано же по русски, что нужно выбрать число от 1 до 10. По умолчанию выбрана планета Земля");
+    }
     else if (k == 1)
-        std::cout << "Ха, попался! Солнце - это звезда. Как можно этого не знать? Еще скажи что Земля плоская. По умолчанию выбрана планета Земля." << std::endl;
+        text.setString("Ха, попался! Солнце - это звезда. Как можно этого не знать? Еще скажи что Земля плоская. По умолчанию выбрана планета Земля.");
     else if (k == 10)
         std::cout << "Ха, попался! Но я не виню тебя, мало кто знает, что Плутон с 2004 года перестал считаться планетой. Мне жалко эту планету. По умолчанию выбрана планета Земля" << std::endl;
 
@@ -64,108 +78,6 @@ int main()
     sf::Sprite background;
     background.setTexture(plante[k]);
 
-    /*if ((k > 10) || (k < 1))
-    {
-        std::cout << "Написано же по русски, что нужно выбрать число от 1 до 10. По умолчанию выбрана планета Земля" << std::endl;
-        if (!texture.loadFromFile("img/Earth.jpg"))
-        {
-            std::cout << "ERROR: not found Earth.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 1)
-    {
-        std::cout << "Ха, попался! Солнце - это звезда. Как можно этого не знать? Еще скажи что Земля плоская. По умолчанию выбрана планета Земля." << std::endl;
-        if (!texture.loadFromFile("img/Earth.jpg"))
-        {
-            std::cout << "ERROR: not found Earth.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 10)
-    {
-        std::cout << "Ха, попался! Но я не виню тебя, мало кто знает, что Плутон с 2004 года перестал считаться планетой. Мне жалко эту планету. По умолчанию выбрана планета Земля" << std::endl;
-        if (!texture.loadFromFile("img/Earth.jpg"))
-        {
-            std::cout << "ERROR: not found Earth.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 2)
-    {
-        if (!texture.loadFromFile("img/Earth.jpg"))
-        {
-            std::cout << "ERROR: not found Earth.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 3)
-    {
-        if (!texture.loadFromFile("img/Merkuri.jpg"))
-        {
-            std::cout << "ERROR: not found Merkuri.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 4)
-    {
-        if (!texture.loadFromFile("img/Venera.jpg"))
-        {
-            std::cout << "ERROR: not found Venera.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 5)
-    {
-        if (!texture.loadFromFile("img/Mars.jpg"))
-        {
-            std::cout << "ERROR: not found Masrs.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 6)
-    {
-        if (!texture.loadFromFile("img/Jupiter.jpg"))
-        {
-            std::cout << "ERROR: not found Jupiter.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 7)
-    {
-        if (!texture.loadFromFile("img/Saturn.jpg"))
-        {
-            std::cout << "ERROR: not found Saturn.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 8)
-    {
-        if (!texture.loadFromFile("img/Uran.jpg"))
-        {
-            std::cout << "ERROR: not found Uran.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }
-    else if (k == 9)
-    {
-        if (!texture.loadFromFile("img/Neptun.jpg"))
-        {
-            std::cout << "ERROR: not found Neptun.jpg" << std::endl;
-            return -1;
-        }
-        sf::Sprite background(texture);
-    }*/
     //Создание окна
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Flying ball!");
 
@@ -200,6 +112,17 @@ int main()
             t = 0;
         }
 
+        text.setFont(font); // font is a sf::Font
+
+        // set the character size
+        text.setCharacterSize(24); // in pixels, not points!
+
+        // set the color
+        text.setFillColor(sf::Color::Red);
+
+        // set the text style
+        text.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
         // Движение шарика
         if (circle != nullptr)
             circle->Move(t, g);
@@ -212,6 +135,12 @@ int main()
         //Перемещение фигуры в буфер
         if (circle != nullptr)
             window.draw(*circle->Get());
+
+        window.draw(text);
+        /*for (int i = 0; i++; i < 10)
+        {
+            window.draw(*planets[i]->Get());
+        }*/
 
         //Отобразить все что есть в буфер
         window.display();

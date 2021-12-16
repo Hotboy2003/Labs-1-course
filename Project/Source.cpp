@@ -1,9 +1,29 @@
 #include <SFML/Graphics.hpp>
-#include "Header.hpp"
+#include "Source.hpp"
 
 // пространство имен
 namespace ao
 {
+	/*Planets::Planets(int x0, int y0, float r0)
+	{
+		m_x0 = x0;
+		m_y0 = y0;
+		m_r0 = r0;
+		m_planets = new sf::CircleShape(m_r0);
+		m_planets->setOrigin(m_r0, m_r0);
+		m_planets->setPosition(m_x0, m_y0);
+		m_planets->setFillColor(sf::Color::Green);
+	}
+	Planets::~Planets()
+	{
+		delete m_planets;
+	}
+	sf::CircleShape* Planets::Get()
+	{
+		return m_planets;
+	}*/
+
+
 	// класс
 	Circle::Circle(int x, int y, float r, float angle, float v0)
 	{
