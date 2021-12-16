@@ -4,20 +4,6 @@
 // пространство имен
 namespace ao
 {
-	/*class Planets
-	{
-	public:
-		Planets(int x0, int y0, float r0);
-
-		~Planets();
-
-		sf::CircleShape* Get();
-
-	private:
-		int m_x0, m_y0;
-		float m_r0;
-		sf::CircleShape* m_planets;
-	};*/
 	// класс
 	class Circle
 	{
@@ -41,4 +27,10 @@ namespace ao
 		float m_v0;
 		sf::CircleShape* m_circle;
 	};
+
+	// вывод меню и выбор планеты
+	int Print();
+
+	// определение g
+	float G(int k);
 }

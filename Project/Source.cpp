@@ -1,33 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include "Source.hpp"
+#include <iostream>
 
 // пространство имен
 namespace ao
 {
-	/*Planets::Planets(int x0, int y0, float r0)
-	{
-		m_x0 = x0;
-		m_y0 = y0;
-		m_r0 = r0;
-		m_planets = new sf::CircleShape(m_r0);
-		m_planets->setOrigin(m_r0, m_r0);
-		m_planets->setPosition(m_x0, m_y0);
-		m_planets->setFillColor(sf::Color::Green);
-	}
-	Planets::~Planets()
-	{
-		delete m_planets;
-	}
-	sf::CircleShape* Planets::Get()
-	{
-		return m_planets;
-	}*/
-
-
-	// класс
+	// конструктор
 	Circle::Circle(int x, int y, float r, float angle, float v0)
 	{
-		// конструктор
 		m_x = x;
 		m_y = y;
 		m_r = r;
@@ -39,13 +19,13 @@ namespace ao
 		m_circle->setFillColor(sf::Color::Green);
 	}
 
-		// Деструктор 
+	// Деструктор 
 	Circle::~Circle()
 	{
 		delete m_circle;
 	}
 
-		// метод, задающий движение 
+	// метод, задающий движение 
 	void Circle::Move(float t, float g)
 	{
 		float x = m_x + m_v0 * cos(m_angle) * t;
@@ -54,9 +34,37 @@ namespace ao
 		m_circle->setPosition(x, y);
 	}
 
-		// передача объекта
+	// передача объекта
 	sf::CircleShape* Circle::Get()
 	{
 		return m_circle;
+	}
+
+	//вывод текста и выбор планеты
+	int Print()
+	{
+		int k;
+		std::cout << "Выберите планету: " << std::endl;
+		std::cout << "Солнце -- 1 " << std::endl;
+		std::cout << "Земля -- 2 " << std::endl;
+		std::cout << "Меркурий -- 3 " << std::endl;
+		std::cout << "Венера -- 4 " << std::endl;
+		std::cout << "Марс -- 5 " << std::endl;
+		std::cout << "Юпитер -- 6 " << std::endl;
+		std::cout << "Сатурн -- 7 " << std::endl;
+		std::cout << "Уран -- 8 " << std::endl;
+		std::cout << "Нептун -- 9 " << std::endl;
+		std::cout << "Плутон -- 10 " << std::endl;
+
+		std::cin >> k;
+		return k;
+	}
+
+	// определение g
+	float G(int k)
+	{
+		float grav[11] = { 0, 9.8, 9.8, 3.7, 8.87, 3.721, 24.79, 10.44, 8.87, 11.15, 9.8 };
+		float g = grav[k];
+		return g;
 	}
 }

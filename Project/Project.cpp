@@ -4,19 +4,33 @@
 #include "Source.hpp"
 #include <iostream>
 
-using namespace std::chrono_literals;
+//using namespace std::chrono_literals;
 
 int main()
 {
-    /*ao::Planets* planets[10];
-    for (int i = 0; i++; i < 10)
-    {
-        planets[i] = new ao::Planets(i * 190, 50, 20);
-    }*/
-
+    // установка русского языка
     setlocale(LC_ALL, "Rus");
+
+    // Начальные переменные
     float t = 0; // с
-    float grav[11] = { 0, 9.8, 9.8, 3.7, 8.87, 3.721, 24.79, 10.44, 8.87, 11.15, 9.8 };
+    float sx = 20; // положение шарика по иксу (м)
+    float sy = 1060; // положение шарика по игреку (м)
+
+    // создаем пустой объект
+    ao::Circle* circle = nullptr;
+
+    // создание текста
+    sf::Font font; 
+    sf::Text text;
+    if (!font.loadFromFile("fonts\\arial.ttf"))
+    {
+        std::cout << "Error font wasn't load" << std::endl;
+        return -1;
+    }
+    text.setFont(font);
+    text.setCharacterSize(20);
+    text.setFillColor(sf::Color::Red);
+    text.setStyle(sf::Text::Bold);
 
     // Фон
     sf::Image planimg[11];
@@ -43,48 +57,28 @@ int main()
     plante[9].loadFromImage(planimg[9]);
     plante[10].loadFromImage(planimg[10]);
 
-    sf::Text text;
-    sf::Font font;
-    
-
     // Определяем планету
-    int k;
-    std::cout << "Выберите планету: " << std::endl;
-    std::cout << "Солнце -- 1 " << std::endl;
-    std::cout << "Земля -- 2 " << std::endl;
-    std::cout << "Меркурий -- 3 " << std::endl;
-    std::cout << "Венера -- 4 " << std::endl;
-    std::cout << "Марс -- 5 " << std::endl;
-    std::cout << "Юпитер -- 6 " << std::endl;
-    std::cout << "Сатурн -- 7 " << std::endl;
-    std::cout << "Уран -- 8 " << std::endl;
-    std::cout << "Нептун -- 9 " << std::endl;
-    std::cout << "Плутон -- 10 " << std::endl;
+    int k = ao::Print();
 
-    std::cin >> k;
-
+    // если пользователь выберет что то не то
     if ((k > 10) || (k < 1))
     {
         k = 2;
-        std::cout << "Написано же по русски, что нужно выбрать число от 1 до 10. По умолчанию выбрана планета Земля" << std::endl;
-        text.setString("Написано же по русски, что нужно выбрать число от 1 до 10. По умолчанию выбрана планета Земля");
+        text.setString(L"Написано же по русски, что нужно выбрать число от 1 до 10. По умолчанию выбрана планета Земля");
     }
     else if (k == 1)
-        text.setString("Ха, попался! Солнце - это звезда. Как можно этого не знать? Еще скажи что Земля плоская. По умолчанию выбрана планета Земля.");
+        text.setString(L"Ха, попался! Солнце - это звезда. Как можно этого не знать? Еще скажи что Земля плоская. По умолчанию выбрана планета Земля.");
     else if (k == 10)
-        std::cout << "Ха, попался! Но я не виню тебя, мало кто знает, что Плутон с 2004 года перестал считаться планетой. Мне жалко эту планету. По умолчанию выбрана планета Земля" << std::endl;
+        text.setString(L"Ха, попался! Но я не виню тебя, мало кто знает, что Плутон с 2004 года перестал считаться планетой. Мне жалко эту планету. По умолчанию выбрана планета Земля");
 
-    float g = grav[k];
+    // определяем фон
     sf::Sprite background;
     background.setTexture(plante[k]);
+    // определяем g
+    float g = ao::G(k);
 
     //Создание окна
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Flying ball!");
-
-    float sx = 20;
-    float sy = 1060;
-
-    ao::Circle* circle = nullptr;
 
     //Цикл (работает до тех пор пока окно открыто)
     while (window.isOpen())
@@ -96,6 +90,7 @@ int main()
                 window.close();
         }
 
+        // взааимодействие с мышью
         if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             sf::Vector2i mp = sf::Mouse::getPosition(window);
@@ -112,17 +107,6 @@ int main()
             t = 0;
         }
 
-        text.setFont(font); // font is a sf::Font
-
-        // set the character size
-        text.setCharacterSize(24); // in pixels, not points!
-
-        // set the color
-        text.setFillColor(sf::Color::Red);
-
-        // set the text style
-        text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-
         // Движение шарика
         if (circle != nullptr)
             circle->Move(t, g);
@@ -130,24 +114,22 @@ int main()
         //очистить окно от всего
         window.clear();
 
+        // рисуем фон и текст
         window.draw(background);
+        window.draw(text);
 
         //Перемещение фигуры в буфер
         if (circle != nullptr)
             window.draw(*circle->Get());
 
-        window.draw(text);
-        /*for (int i = 0; i++; i < 10)
-        {
-            window.draw(*planets[i]->Get());
-        }*/
-
         //Отобразить все что есть в буфер
         window.display();
 
-        std::this_thread::sleep_for(40ms);
+        //изменение времени
+        //std::this_thread::sleep_for(40ms);
         t += 0.04;
     }
+
     //Удаление фигур (обязательно)
     if (circle != nullptr)
         delete circle;

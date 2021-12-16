@@ -31,3 +31,4 @@ target_link_libraries("${PROJECT_NAME}" optimized sfml-graphics-s
 						  )
 target_link_libraries("${PROJECT_NAME}" opengl32 freetype winmm gdi32 openal32 flac vorbisenc vorbisfile vorbis ogg)
 file(COPY "img" DESTINATION "/")
+file(COPY "fonts" DESTINATION "/")
