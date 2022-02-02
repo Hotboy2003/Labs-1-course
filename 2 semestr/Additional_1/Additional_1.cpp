@@ -1,31 +1,31 @@
 #include <iostream>
 #include <chrono>
-#define N 1000
+#define N_max 1000
 
-int max_number(int *mas, int i, int k)
+int max_number(int* mas, int n) 
 {
-	if (mas[i] > k)
-	{
-		k = mas[i];
-		i++;
-	}
-	if (i > N)
-		return k;
-	else
-		max_number(mas, i, k);
+    static int max{};
+    if (n == 1)
+        max = mas[0];
+    else
+    {
+        if (max_number(mas, n - 1) <= mas[n - 1])
+            max = mas[n - 1];
+    }
+    return max;
 }
 
-int main()
+
+
+int main() 
 {
-	srand(time(0));
-	int mas[N];
-	for (int i = 0; i < N; i++)
-		mas[i] = rand();
-	int i = 0;
-	int k = 0;
+    srand(time(0));
+    int mas[N_max];
+    for (int i = 0; i < N_max; i++)
+        mas[i] = rand();
 
-	int maxi = max_number(mas, i, k);
 
-	std::cout << maxi;
-	return 0;
+    std::cout << max_number(mas, N_max) << std::endl;
+
+    return 0;
 }
