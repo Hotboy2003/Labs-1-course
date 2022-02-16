@@ -12,4 +12,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 include_directories("inc/")
 
-add_executable("${PROJECT_NAME}" Lab_3.cpp)
+add_executable("${PROJECT_NAME}" Lab_3_2.cpp)

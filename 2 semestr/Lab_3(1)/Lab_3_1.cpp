@@ -1,7 +1,7 @@
 #include <iostream>
 #include <chrono>
-#define N 10
-#define M 10
+#define N 100000
+#define M 10000
 
 class Timer
 {
@@ -51,7 +51,7 @@ void quicksort(int a, int b, int(&mas)[N])
 	quicksort(r, b, mas);
 }
 
-int search(int n,int mas1[N],int k)
+int binarnysearch(int n,int mas1[N],int k)
 {
 	if (k < mas1[0])
 		return -1;
@@ -83,11 +83,11 @@ int main()
 
 	int mas1[N];
 	for (int i = 0; i < N; i++)
-		mas1[i] = 15-i;
+		mas1[i] = rand();
 
 	int mas2[M];
 	for (int i = 0; i < M; i++)
-		mas2[i] = i+1;
+		mas2[i] = rand();
 
 
 	int a = 0;
@@ -96,24 +96,32 @@ int main()
 
 	quicksort(a, b, mas1);
 
-	for (int i = 0; i < N; i++)
+	/*for (int i = 0; i < N; i++)
 		std::cout << mas1[i] << " ";
 	std::cout << std::endl;
 
 	for (int i = 0; i < M; i++)
 		std::cout << mas2[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 
 	Timer t;
 
 	for (int i = 0; i < M; i++)
 	{
-		int j = search(N-1, mas1, mas2[i]);
-		if (j >= 0)
-			std::cout << "Ќашли: " << mas1[j] << std::endl;
+		int j = binarnysearch(N-1, mas1, mas2[i]);
 	}
+
+	/*for (int i = 0; i < N; i++)
+		for (int j = 0; j < M; j++)
+			if (mas1[i] == mas2[j])
+				break;*/
 
 	std::cout << "Time elapsed: " << t.elapsed() << '\n';
 
 	return 0;
 }
+
+//¬рем€ работы с N=100000 и M=10000 простым перебором -- 2.69141
+//¬рем€ работы с N=100000 и M=10000 бинарным поиском -- 0.0039226
+
+//»значально € осуществил вывод запросов, которые нашлись, но они мешали измерить врем€ работы поиска
