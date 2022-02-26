@@ -27,13 +27,13 @@ public:
 	}
 };
 
-void quicksort(int a,int b,int (&mas)[N])
+void quicksort(int a,int b,int mas[N])
 {
 	if (a >= b)
 		return;
 	int l = a - 1;
 	int r = b + 1;
-	int m = rand()%(b-a+1)+a;
+	int m = (rand() * rand()) % (b - a + 1) + a;
 	int k = mas[m];
 
 	while (1)
@@ -79,9 +79,9 @@ int main()
 
 	Timer t;
 
-	//quicksort(a, b, mas);
+	quicksort(a, b, mas);
 
-	bubblesort(mas, N);
+	//bubblesort(mas, N);
 
 	std::cout << "Time elapsed: " << t.elapsed() << '\n';
 
