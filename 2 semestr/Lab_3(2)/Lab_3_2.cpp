@@ -12,9 +12,8 @@ double bisection(double a, double b, double eps)
 	while ((b - a) / 2 > eps) 
 	{
 		x = (a + b) / 2;
-		if ((x == a) || (x == b))
-			return x;
-		else if ((f(a) * f(x)) > 0) 
+		
+		if ((f(a) * f(x)) > 0) 
 			a = x;
 		else 
 			b = x;
