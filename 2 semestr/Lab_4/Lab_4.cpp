@@ -1,7 +1,7 @@
 #include <iostream>
 #include <chrono>
-#define N 10000
-#define M 1000
+#define N 10
+#define M 5
 
 class Timer
 {
@@ -53,6 +53,18 @@ void ADD(T_List* head, int x)
 	head->next = p;
 }
 
+void CLEAR(T_List* head)
+{
+	T_List* tmp;
+	T_List* p = head->next;
+	while (p != nullptr)
+	{
+		tmp = p;
+		p = p->next;
+		delete tmp;
+	}
+}
+
 void ADD_END(T_List* head, int x)
 {
 	T_List* p = head->next;
@@ -87,7 +99,9 @@ int main()
 	for (int i = 0; i < M; i++)
 		ADD_END(head, 3);
 
-	//PRINT(head);
+	PRINT(head);
+
+	CLEAR(head);
 
 	delete head;
 
