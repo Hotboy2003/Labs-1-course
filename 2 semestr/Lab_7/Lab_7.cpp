@@ -29,6 +29,12 @@ private:
 		delete m_mat;
 	}
 
+	int getN() const { return m_n; }
+	int getM() const { return m_m; }
+	int get(int i, int j) const { return m_mat[i][j]; }
+	void set(int i, int j, T data) { m_mat[i][j] = data; }
+
+
 	//Конструктор копирования
 	Matrix& operator=(const Matrix& mat)
 	{
@@ -57,6 +63,20 @@ private:
 				m_mat[i][j] = mat.m_mat[i][j];
 	}
 	
+	Matrix operator*(const Matrix& mat)
+	{
+		Matrix tmp(3,4);
+		for (int i = 0; i < m_n; i++)
+			for (int j = 0; j < mat.m_m; j++)
+			{
+				int sum = 0;
+				for (int k = 0; k < m_m; k++)
+					sum += m_mat[i][k] * m_mat[i][j];
+				tmp.set(i, j, sum);
+			}
+
+			return tmp;
+	}
 };
 
 //Оператор перегрузки ввода
