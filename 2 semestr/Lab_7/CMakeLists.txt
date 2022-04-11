@@ -12,4 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 include_directories("inc/")
 
-add_executable("${PROJECT_NAME}" Lab_7.cpp)
+add_executable("${PROJECT_NAME}" lab_7.cpp
+									Matrix.cpp
+									Matrix.hpp
+									)
+											
+target_link_libraries("${PROJECT_NAME}" )
