@@ -1,8 +1,8 @@
 #include <iostream>
 #include <cassert>
 #include "Matrix.hpp"
-using my::math::Mat22d;
-using my::math::Vec2d;
+using AO::Mat22d;
+using AO::Vec2d;
 
 int main()
 {
@@ -82,7 +82,7 @@ int main()
                            {3,4}
                    } });
 
-        auto B = A.determinant();
+        auto B = A.det();
         assert(B == -2);
     }
     std::cout << "Done!" << std::endl;
@@ -95,9 +95,7 @@ int main()
                    } });
 
         auto B = A.inverse();
-        //std::cout << std::fixed << B.get(0, 0) << std::endl;
         assert(abs(B.get(0, 0) - static_cast<double>(-2) / 3) < 1e-6);
-        //assert(B.get(0, 1) == 1);
     }
     std::cout << "Done!" << std::endl;
     return 0;

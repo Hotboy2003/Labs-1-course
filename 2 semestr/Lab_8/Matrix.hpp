@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-namespace my::math
+namespace AO
 {
     //#define MY_DEBUG
     template<typename T, int N, int M>
@@ -9,6 +9,7 @@ namespace my::math
     {
         T mas[N][M];
     };
+
     template<typename T, int N, int M>
     class Matrix
     {
@@ -24,6 +25,7 @@ namespace my::math
                 for (int j = 0; j < m_m; j++)
                     m_mat[i][j] = 0;
         }
+
         Matrix(const T mas[N][M])
         {
 #ifdef MY_DEBUG
@@ -35,6 +37,7 @@ namespace my::math
                 for (int j = 0; j < m_m; j++)
                     m_mat[i][j] = mas[i][j];
         }
+
         Matrix(const MasWrapper<T, N, M>& mas)
         {
 #ifdef MY_DEBUG
@@ -46,6 +49,7 @@ namespace my::math
                 for (int j = 0; j < m_m; j++)
                     m_mat[i][j] = mas.mas[i][j];
         }
+
         Matrix(const Matrix<T, N, M>& mat)
         {
 #ifdef MY_DEBUG
@@ -80,6 +84,7 @@ namespace my::math
 
             return *this;
         }
+
         template<typename A, int B, int C>
         Matrix<T, N, M> operator+(const Matrix<A, B, C>& mat)
         {
@@ -92,6 +97,7 @@ namespace my::math
                     tmp.m_mat[i][j] = m_mat[i][j] + mat.m_mat[i][j];
             return tmp;
         }
+
         template<typename A, int B, int C>
         Matrix<T, N, M> operator*(const Matrix<A, B, C>& mat)
         {
@@ -109,6 +115,7 @@ namespace my::math
                 }
             return tmp;
         }
+
         template<typename A, int B, int C>
         Matrix<T, N, M> operator-(const Matrix<A, B, C>& mat)
         {
@@ -121,6 +128,7 @@ namespace my::math
                     tmp.m_mat[i][j] = m_mat[i][j] - mat.m_mat[i][j];
             return tmp;
         }
+
         Matrix transposition()
         {
             Matrix<T, N, M> tmp;
@@ -129,7 +137,8 @@ namespace my::math
                     tmp.m_mat[i][j] = m_mat[j][i];
             return tmp;
         }
-        int determinant()
+
+        int det()
         {
             int d = 0;
             if (m_n == 2 && m_m == 2)
@@ -156,7 +165,7 @@ namespace my::math
             Matrix<T, N, M> tmp;
 
             if ((m_n == 2 && m_m == 2) || (m_n == 3 && m_m == 3)) {
-                int d = determinant();
+                int d = det();
                 if (m_n == 2) {
                     tmp.m_mat[0][0] = static_cast<double>(m_mat[1][1]) / d;
                     tmp.m_mat[0][1] = static_cast<double>(-m_mat[0][1]) / d;
@@ -180,6 +189,7 @@ namespace my::math
             }
             return tmp;
         }
+
         ~Matrix()
         {
 #ifdef MY_DEBUG
@@ -191,10 +201,12 @@ namespace my::math
 
         template<typename A, int B, int C>
         friend std::ostream& operator<<(std::ostream& os, const Matrix<A, B, C>& mat);
+
     private:
         int m_n, m_m;
         T m_mat[N][M];
     };
+
     template<typename T, int N, int M>
     std::istream& operator>>(std::istream& in, Matrix<T, N, M>& mat)
     {
@@ -203,6 +215,7 @@ namespace my::math
                 in >> mat.m_mat[i][j];
         return in;
     }
+
     template<typename T, int N, int M>
     std::ostream& operator<<(std::ostream& out, const Matrix<T, N, M>& mat)
     {
@@ -214,6 +227,7 @@ namespace my::math
         }
         return out;
     }
+
     using Vec2i = Matrix<int, 2, 1>;
     using Vec2d = Matrix<double, 2, 1>;
     using Mat22i = Matrix<int, 2, 2>;
