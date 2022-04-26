@@ -1,17 +1,39 @@
 ﻿#include <iostream>
 #include <string>
 
-class JAVA
+class LANG
 {
 public:
-    JAVA()
+    LANG()
     {
 
     }
 
-    virtual void PRINTHELLOWORLD()
+    virtual std::string someCodeRelatedThing() = 0;
+    virtual std::string someCodeRelatedStuff() = 0;
+
+    virtual ~LANG()
     {
-        std::cout << "java hello world" << std::endl;
+
+    }
+};
+
+class JAVA : LANG
+{
+public:
+    JAVA() : LANG()
+    { 
+
+    }
+
+    std::string someCodeRelatedThing() override
+    {
+        return "java thing";
+    }
+
+    std::string someCodeRelatedStuff() override
+    {
+        return "java stuff";
     }
 
     virtual ~JAVA()
@@ -22,17 +44,22 @@ public:
 protected:
 };
 
-class C_PLUS_PLUS : public JAVA
+class C_PLUS_PLUS : public LANG
 {
 public:
-    C_PLUS_PLUS() : JAVA()
+    C_PLUS_PLUS() : LANG()
     {
 
     }
 
-    void PRINTHELLOWORLD() override
+    std::string someCodeRelatedThing() override
     {
-        std::cout << "c_plus_plus hello world" << std::endl;
+        return "C++ thing";
+    }
+
+    std::string someCodeRelatedStuff() override
+    {
+        return "C++ stuff";
     }
 
     virtual ~C_PLUS_PLUS() 
@@ -42,17 +69,22 @@ public:
 protected:
 };
 
-class PHP : public JAVA
+class PHP : public LANG
 {
 public:
-    PHP() : JAVA()
+    PHP() : LANG()
     {
 
     }
 
-    void PRINTHELLOWORLD() override
+    std::string someCodeRelatedThing() override
     {
-        std::cout << "PHP hello world" << std::endl;
+        return "PHP thing";
+    }
+
+    std::string someCodeRelatedStuff() override
+    {
+        return "PHP stuff";
     }
 
     virtual ~PHP()
@@ -67,13 +99,13 @@ protected:
 int main()
 {
     JAVA java;
-    java.PRINTHELLOWORLD();
-
-    C_PLUS_PLUS cplusplus;
-    cplusplus.PRINTHELLOWORLD();
+    std::cout << java.someCodeRelatedStuff() << std::endl;
 
     PHP php;
-    php.PRINTHELLOWORLD();
+    std::cout << php.someCodeRelatedThing() << std::endl;
+
+    C_PLUS_PLUS cplusplus;
+    std::cout << cplusplus.someCodeRelatedStuff() << std::endl;
 
     return 0;
 }
