@@ -166,6 +166,8 @@ namespace AO
 
             if ((m_n == 2 && m_m == 2) || (m_n == 3 && m_m == 3)) {
                 int d = det();
+                if (d == 0)
+                    throw std::exception("Zero determinant");
                 if (m_n == 2) {
                     tmp.m_mat[0][0] = static_cast<double>(m_mat[1][1]) / d;
                     tmp.m_mat[0][1] = static_cast<double>(-m_mat[0][1]) / d;

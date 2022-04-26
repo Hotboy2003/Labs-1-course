@@ -48,10 +48,14 @@ public:
     }
     void READ() 
     {
-        std::ifstream in("IMAGE.bmp", std::ios::binary);
+        std::ifstream in("IMAGE1.bmp", std::ios::binary);
+        if (!in.is_open())
+            std::cout << "not work" << std::endl;
         in.read(reinterpret_cast<char*>(&bmpHeader), sizeof(BMPHEADER));
+        std::cout << bmpHeader.Size << std::endl;
 
         in.read(reinterpret_cast<char*>(&bmpInfo), sizeof(BMPINFO));
+        std::cout << bmpInfo.Height << std::endl;
 
         pix = new Pixel * [bmpInfo.Height];
         for (int i = 0; i < bmpInfo.Height; i++)
@@ -129,27 +133,33 @@ public:
         for (int i = 0; i < bmpInfo.Height; i++)
             for (int j = 0; j < bmpInfo.Width; j++)
             {
-                pix_new[i][j].b = 255- pix_new[i][j].b;
-                pix_new[i][j].r = 255- pix_new[i][j].r;
-                pix_new[i][j].g = 255- pix_new[i][j].g;
+                pix_new[i][j].b = 256- pix_new[i][j].b;
+                pix_new[i][j].r = 256- pix_new[i][j].r;
+                pix_new[i][j].g = 256- pix_new[i][j].g;
             }
     }
 
     ~BMP() 
     {
-        for (int i = 0; i < bmpInfo.Height; i++)
-            delete[] pix[i];
-        delete[] pix;
+        if (pix != nullptr)
+        {
+            for (int i = 0; i < bmpInfo.Height; i++)
+                delete[] pix[i];
+            delete[] pix;
+        }
 
-        for (int i = 0; i < bmpInfo_new.Height; i++)
-            delete[] pix_new[i];
-        delete[] pix_new;
+        if (pix_new != nullptr)
+        {
+            for (int i = 0; i < bmpInfo_new.Height; i++)
+                delete[] pix_new[i];
+            delete[] pix_new;
+        }
     }
 private:
     BMPHEADER bmpHeader;
     BMPINFO bmpInfo;
-    Pixel** pix;
-    Pixel** pix_new;
+    Pixel** pix = nullptr;
+    Pixel** pix_new = nullptr;
     BMPHEADER bmpHeader_new;
     BMPINFO bmpInfo_new;
 };

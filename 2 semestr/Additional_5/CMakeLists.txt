@@ -12,9 +12,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 include_directories("inc/")
 
-add_executable("${PROJECT_NAME}" lab_8.cpp
-									BMP.cpp
-									BMP.hpp
+add_executable("${PROJECT_NAME}" Additional_5.cpp
+
 									)
 											
 target_link_libraries("${PROJECT_NAME}" )
