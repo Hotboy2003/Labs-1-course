@@ -8,12 +8,12 @@ struct list
 	struct list* prev; // указатель на предыдущий элемент
 };
 
-struct list* INIT(int a)  // а- значение первого узла
+struct list* INIT()  // а- значение первого узла
 {
 	struct list* list;
 	// выделение памяти под корень списка
 	list = (struct list*)malloc(sizeof(struct list));
-	list->field = a;
+
 	list->next = list; // указатель на следующий узел
 	list->prev = list; // указатель на предыдущий узел
 	return(list);
@@ -21,35 +21,36 @@ struct list* INIT(int a)  // а- значение первого узла
 
 struct list* ADD(list* list, int number)
 {
-	struct list* temp, * p;
-	temp = (struct list*)malloc(sizeof(list));
-
-	p = list->next; // сохранение указателя на следующий узел
-	list->next = temp; // предыдущий узел указывает на создаваемый
-
-	temp->field = number; // сохранение поля данных добавляемого узла
-
-	temp->next = p; // созданный узел указывает на следующий узел
-	temp->prev = list; // созданный узел указывает на предыдущий узел
-	p->prev = temp;
-	return(temp);
+	struct list* p;
+	p = (struct list*)malloc(sizeof(struct list));
+	p->field = number;
+	p->prev = list; 
+	p->next = list->next; 
+	list->next = p;
+	p->next->prev = p;
+	
+	return(list);
 }
 
 struct list* DELETE(list* list)
 {
-	struct list* prev, * next;
-	prev = list->prev; // узел, предшествующий lst
-	next = list->next; // узел, следующий за lst
-	prev->next = list->next; // переставляем указатель
-	next->prev = list->prev; // переставляем указатель
-	free(list); // освобождаем память удаляемого элемента
-	return(prev);
+	struct list* p = list->next;
+	while (p != list)
+	{
+		p->prev->next = p->next;
+		p->next->prev = p->prev;
+		struct list* tmp = p;
+		p = p->next;
+		free(tmp);
+	}
+
+	return(list);
 }
 
 void PRINT(list* list)
 {
 	struct list* p;
-	p = list;
+	p = list->next;
 	do {
 		printf("%d ", p->field); // вывод значения элемента p
 		p = p->next; // переход к следующему узлу
@@ -59,20 +60,24 @@ void PRINT(list* list)
 void PRINTR(list* list)
 {
 	struct list* p;
-	p = list;
+	p = list->prev;
 	do {
+		printf("%d ", p->field);
 		p = p->prev;  // переход к предыдущему узлу
-		printf("%d ", p->field); // вывод значения элемента p
+		 // вывод значения элемента p
 	} while (p != list); // условие окончания обхода
 }
 
 int main()
 {
-	list* list = INIT(10);
+	list* list = INIT();
 	ADD(list, 15);
 	ADD(list, 1);
 	ADD(list, 3);
 	PRINT(list);
+	PRINTR(list);
 	DELETE(list);
+
+	free(list);
 	return 0;
 }
