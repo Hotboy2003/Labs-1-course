@@ -1,16 +1,16 @@
 ﻿#include <iostream>
 #include "bmp.hpp"
 
-int main() {
+int main() 
+{
     BMP image;
-    image.readBMP("CIN.bmp");
+    image.READBMP("CIN.bmp");
 
     std::string word;
     std::cin >> word;
-    image.shifr(word);
-    //image.ashifr();
+    image.SHIFR(word);
 
-    image.writeBMP("COUT.bmp");
+    image.WRITEBMP("COUT.bmp");
 
     return 0;
 }

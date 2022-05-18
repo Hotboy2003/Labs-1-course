@@ -45,11 +45,9 @@ public:
     BMP();
     ~BMP();
 
-    void readBMP(std::string name);
-    void writeBMP(std::string name);
-
-    void shifr(std::string word);
-    void ashifr();
+    void READBMP(std::string name);
+    void WRITEBMP(std::string name);
+    void SHIFR(std::string word);
 
 private:
     BMPHEADER m_bmpHeader;

@@ -11,7 +11,7 @@ BMP::~BMP()
     delete[] m_pixels;
 
 }
-void BMP::readBMP(std::string name) 
+void BMP::READBMP(std::string name) 
 {
     std::ifstream in(name, std::ios::binary);
 
@@ -40,9 +40,9 @@ void BMP::readBMP(std::string name)
                 in.read(&c, 1);
             }
     }
-
 }
-void BMP::writeBMP(std::string name) 
+
+void BMP::WRITEBMP(std::string name) 
 {
     std::ofstream out(name, std::ios::binary);
 
@@ -87,7 +87,7 @@ void BMP::writeBMP(std::string name)
     }
 }
 
-void BMP::shifr(std::string word) 
+void BMP::SHIFR(std::string word) 
 {
     int space = 0;
     for (int i = 0; i < word.length(); i++) 
@@ -170,14 +170,6 @@ void BMP::shifr(std::string word)
             m_pixels[5][space + 5].r++;
             m_pixels[6][space + 6].r++;
         }
-
         space += 8;
     }
-}
-
-void BMP::ashifr() 
-{
-    for (int i = 0; i < m_bmpInfo.Height; i++)
-        for (int j = 0; j < m_bmpInfo.Width; j++)
-            m_pixels[i][j].g *= 10+100;
 }
