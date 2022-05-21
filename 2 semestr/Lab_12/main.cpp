@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory> 
 #include <string>
+#define MY_DEBUG
 
 class Teacher;
 class Student 
@@ -9,10 +10,15 @@ public:
 	Student(const std::string& name) 
 	{
 		m_name = name;
+#ifdef MY_DEBUG
+		std::cout << "Student constructor" << std::endl;
+#endif
 	}
 	~Student() 
 	{
-
+#ifdef MY_DEBUG
+		std::cout << "Student destrucor" << std::endl;
+#endif
 	}
 
 	std::string NAMESTUDENT() 
@@ -39,10 +45,15 @@ public:
 	{
 		m_name = name;
 		m_i = 0;
+#ifdef MY_DEBUG
+		std::cout << "Teacher constructor" << std::endl;
+#endif
 	}
 	~Teacher() 
 	{
-
+#ifdef MY_DEBUG
+		std::cout << "Teacher destructor" << std::endl;
+#endif
 	}
 
 	std::string NAMETEACHER()
